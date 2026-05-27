@@ -1,1 +1,1 @@
-# ShortWGS
+# ShortWGS マニュアル化
