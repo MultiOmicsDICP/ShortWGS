@@ -1,8 +1,3 @@
-<img width="3468" height="1216" alt="DICP_DICP_kun" src="https://github.com/user-attachments/assets/1d6c4c24-1e3f-4b81-8b1f-fce5899d608e" />
-
-<br>
-
-<br>
 
 # ShortWGS マニュアル  
 
