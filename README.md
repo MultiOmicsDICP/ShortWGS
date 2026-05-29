@@ -1,4 +1,4 @@
-<img width="3468" height="1216" alt="DICP_DICP_kun" src="https://github.com/user-attachments/assets/205e0026-96f3-4784-9a0d-6f46c9e13e4d" />
+<img width="3468" height="1216" alt="DICP_DICP_kun(1)" src="https://github.com/user-attachments/assets/aee8afff-dd82-4ee7-b7f0-55d761dd4940" />
 
 
 
@@ -36,4 +36,23 @@ GenotypeGVCFs
 VariantFiltration  
 ↓  
 PASS VCF  
+
+
+
+```mermaid
+graph TD
+A[FASTQ] --> B[FastQC]
+B --> C[Trimming]
+C --> D[BWA-MEM]
+D --> E[Sort]
+E --> F[MarkDuplicates]
+F --> G[BQSR]
+G --> H[HaplotypeCaller]
+H --> I[GenotypeGVCFs]
+I --> J[VariantFiltration]
+J --> K[PASS VCF]
+```
+
+
+
 
