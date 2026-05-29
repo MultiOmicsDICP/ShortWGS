@@ -1,8 +1,8 @@
 # ShortWGS
 
-GATK Best Practices に準拠した
-Short-read Whole Genome Sequencing (WGS)
-解析マニュアル（仮）。
+GATK Best Practices をもとに作成した  
+Short-read Whole Genome Sequencing (WGS)  
+解析マニュアル（仮）。  
 
 ## ドキュメント
 
