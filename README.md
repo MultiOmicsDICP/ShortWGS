@@ -11,22 +11,23 @@ Short-read Whole Genome Sequencing (WGS)
 
 ## Workflow
 
-FASTQ
-↓
-FastQC
-↓
-Trimming
-↓
-BWA-MEM
-↓
-MarkDuplicates
-↓
-BQSR
-↓
-HaplotypeCaller
-↓
-GenotypeGVCFs
-↓
-VariantFiltration
-↓
-PASS VCF
+FASTQ  
+↓  
+FastQC  
+↓  
+Trimming  
+↓  
+BWA-MEM  
+↓  
+MarkDuplicates  
+↓  
+BQSR  
+↓  
+HaplotypeCaller  
+↓  
+GenotypeGVCFs  
+↓  
+VariantFiltration  
+↓  
+PASS VCF  
+
