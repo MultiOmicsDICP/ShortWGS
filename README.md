@@ -1,5 +1,4 @@
-<img width="3468" height="1216" alt="DICP_DICP_kun(1)" src="https://github.com/user-attachments/assets/aee8afff-dd82-4ee7-b7f0-55d761dd4940" />
-
+<img width="680" height="245" alt="スクリーンショット 2026-05-29 10 20 47" src="https://github.com/user-attachments/assets/377707fe-751f-4ac7-afc0-2547926f04c9" />
 
 
 <br>
