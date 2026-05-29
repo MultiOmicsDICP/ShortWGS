@@ -30,6 +30,8 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR768/SRR768162/SRR768162_1.fastq.gz
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR768/SRR768162/SRR768162_2.fastq.gz
 ```
 
+<br>
+
 ### GATK リファレンスデータ
 
 Broad Institute からダウンロード  
@@ -67,7 +69,7 @@ gatk CreateSequenceDictionary -R Homo_sapiens_assembly38.fasta
 
 ## 2：FastQC
 
-FastQCを用いて、fastqファイルのリードの品質をチェックする
+FastQCを用いて、fastqファイルのリードの品質をチェックする。(fastqc.zip,fastqc.html が出力される)
 
 先にFastQCの結果を入れるディレクトリを作成しておくとよい
 ```bash 
@@ -82,7 +84,8 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2.fastq.gz
 
 <br>
 
-## 3：fastpでトリミング
+## 3：fastpでトリミング  
+(trim.fastq.gz が出力される)
 
 ```bash
 fastp \
@@ -121,6 +124,7 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2_trim.fastq.gz
 <br>
 
 ## 4：BWAでマッピング
+(sorted.bamが出力される)
 
 ```bash
 # samを出さずにソート済みBAMを出力
@@ -143,6 +147,9 @@ PL: sequencing platform  (ILLUMINA)
 LB: library名  
 PU : flowcell/lane 識別子  
 
+<br>
+
+
 #### マッピングしたソート済みbamファイルのインデックス作成 (すぐにMarkDuplicatesするならいらないかも)
 ```bash
 samtools index SRR768162_sorted.bam
@@ -151,6 +158,8 @@ samtools index SRR768162_sorted.bam
 <br>
 
 ## 5：MarkDuplicatesで重複除去
+(dedup.bam, metrics.txtが出力される)
+
 ``` bash
 gatk MarkDuplicates \
     -I SRR768162_sorted.bam \
@@ -159,6 +168,8 @@ gatk MarkDuplicates \
     --VALIDATION_STRINGENCY LENIENT \
     --REMOVE_DUPLICATES true
 ```
+
+<br>
 
 #### インデックス作成
 ```bash
@@ -195,7 +206,8 @@ plot-bamstats -p bamstats SRR768162_dedup_stats.txt
 <br>
 
 ## 6：BQSR : BaseRecalibrator -> ApplyBQSR
-既知変異データをもとに、塩基スコアを再計算
+BQSR（Base Quality Score Recalibration）　既知変異データをもとに、シーケンサー由来の品質スコアの偏りを再計算し補正する。
+(recal.table, recal.bamが出力される)
 
 ```bash
 gatk BaseRecalibrator \
@@ -215,6 +227,8 @@ gatk ApplyBQSR \
 <br>
 
 ## 7：HaplotypeCaller バリアント検出
+(g.vcf.gzが出力される)
+
 ```bash
 gatk HaplotypeCaller \
   -R Homo_sapiens_assembly38.fasta \
@@ -227,6 +241,7 @@ gatk HaplotypeCaller \
 <br>
 
 ## 8：Genotyping
+(vcf.gzが出力される)
 
 ```bash
 gatk --java-options "-Xmx4g" GenotypeGVCFs \
