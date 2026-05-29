@@ -24,14 +24,13 @@ Short-read Whole Genome Sequencing (WGS)
 graph TD
 A[FASTQ] --> B[FastQC]
 B --> C[Trimming]
-C --> D[BWA-MEM]
-D --> E[Sort]
-E --> F[MarkDuplicates]
-F --> G[BQSR]
-G --> H[HaplotypeCaller]
-H --> I[GenotypeGVCFs]
-I --> J[VariantFiltration]
-J --> K[PASS VCF]
+C --> D[BWA-MEM (Sort)]
+D --> E[MarkDuplicate]
+E --> F[BQSR]
+F --> G[HaplotypeCaller]
+G --> H[GenotypeGVCFs]
+H --> I[VariantFiltration]
+I --> J[PASS VCF]
 ```
 
 
