@@ -1,3 +1,9 @@
+<img width="3468" height="1216" alt="DICP_DICP_kun" src="https://github.com/user-attachments/assets/205e0026-96f3-4784-9a0d-6f46c9e13e4d" />
+
+
+
+<br>
+
 # ShortWGS
 
 GATK Best Practices をもとに作成した  
