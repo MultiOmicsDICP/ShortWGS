@@ -24,7 +24,7 @@ Short-read Whole Genome Sequencing (WGS)
 graph TD
 A[FASTQ] --> B[FastQC]
 B --> C[Trimming]
-C --> D[BWA-MEM (Sort)]
+C --> D[BWA-MEM（Sort）]
 D --> E[MarkDuplicate]
 E --> F[BQSR]
 F --> G[HaplotypeCaller]
