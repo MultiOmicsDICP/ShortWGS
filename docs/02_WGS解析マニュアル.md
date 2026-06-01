@@ -69,6 +69,9 @@ gatk CreateSequenceDictionary -R Homo_sapiens_assembly38.fasta
 
 ## 2：FastQC
 
+Babraham Institute FastQC  
+https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
 FastQCを用いて、fastqファイルのリードの品質をチェックする。(fastqc.zip,fastqc.html が出力される)
 
 先にFastQCの結果を入れるディレクトリを作成しておくとよい
@@ -84,9 +87,15 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2.fastq.gz
 
 <br>
 
-## 3：fastpでトリミング  
+## 3：fastpでトリミング
+
+fastp  
+https://github.com/opengene/fastp  
+
+FASTQファイルに対して、品質管理（QC）、アダプター除去、フィルタリングなどを行える前処理ツール  
 (trim.fastq.gz が出力される)
 
+ 
 ```bash
 fastp \
  -i SRR768162_1.fastq.gz \
@@ -124,7 +133,15 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2_trim.fastq.gz
 <br>
 
 ## 4：BWAでマッピング
-(sorted.bamが出力される)
+
+BWAでFASTQファイルを参照ゲノム配列にマッピングし、samtoolsでソートする (sorted.bamが出力される)
+
+BWA（Burrows-Wheeler Aligner）  
+https://bio-bwa.sourceforge.net/
+
+samtools  
+https://www.htslib.org/
+
 
 ```bash
 # samを出さずにソート済みBAMを出力
@@ -158,7 +175,11 @@ samtools index SRR768162_sorted.bam
 <br>
 
 ## 5：MarkDuplicatesで重複除去
-(dedup.bam, metrics.txtが出力される)
+
+gatk MarkDuplicate  
+https://gatk.broadinstitute.org/hc/en-us/articles/5358880192027-MarkDuplicates-Picard  
+
+PCR増幅などによって生じた重複リード（Duplicate Reads）を特定・マークする (dedup.bam, metrics.txtが出力される)
 
 ``` bash
 gatk MarkDuplicates \
@@ -209,6 +230,12 @@ plot-bamstats -p bamstats SRR768162_dedup_stats.txt
 BQSR（Base Quality Score Recalibration）　既知変異データをもとに、シーケンサー由来の品質スコアの偏りを再計算し補正する。
 (recal.table, recal.bamが出力される)
 
+BaseRecalibrator  
+https://gatk.broadinstitute.org/hc/en-us/articles/360036898312-BaseRecalibrator
+
+ApplyBQSR  
+https://gatk.broadinstitute.org/hc/en-us/articles/21905038144155-ApplyBQSR
+
 ```bash
 gatk BaseRecalibrator \
     -R Homo_sapiens_assembly38.fasta \
@@ -227,7 +254,12 @@ gatk ApplyBQSR \
 <br>
 
 ## 7：HaplotypeCaller バリアント検出
+
+HaplotypeCallerは、リード配列をもとに参照ゲノムとの違いを解析し、SNPやINDELを検出するGATK標準の変異検出しVCF形式で出力する。
 (g.vcf.gzが出力される)
+
+gatk HaplotypeCaller
+https://gatk.broadinstitute.org/hc/en-us/articles/360042913231-HaplotypeCaller
 
 ```bash
 gatk HaplotypeCaller \
@@ -241,7 +273,12 @@ gatk HaplotypeCaller \
 <br>
 
 ## 8：Genotyping
+
+HaplotypeCallerで作成したGVCFファイルから変異候補を評価し、SNPやINDELの遺伝子型（Genotype）を確定して最終的なVCFファイルを作成する。
 (vcf.gzが出力される)
+
+GenotypeGVCFs  
+https://gatk.broadinstitute.org/hc/en-us/articles/13832766863259-GenotypeGVCFs  
 
 ```bash
 gatk --java-options "-Xmx4g" GenotypeGVCFs \
@@ -267,6 +304,9 @@ SNPとINDELでは、それぞれの指標のパラメーターが違うので、
 | MQ | mapping quality、変異周辺 read のマッピング品質。|
 | MQRankSum | REF/ALT間のmapping quality差を評価。|
 | ReadPosRankSum | ALT allele が read末端に偏っていないか評価。 |
+
+Filtering
+https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering
 
 ```bash
 # SNP抽出し、フィルタリング
@@ -313,7 +353,7 @@ gatk MergeVcfs \
 <br>
 
 ## 10：PASSのみ抽出
-FILTER列でPASSが付与された高品質変異のみ抽出
+VariantFiltrationで付与されたFILTER情報を基に、PASS判定された高信頼度変異のみを抽出する。
 
 ```bash
 gatk SelectVariants \
