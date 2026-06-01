@@ -7,67 +7,24 @@
 <br>
 
 ## Overview
-
-1： サンプルデータ、リファレンスのダウンロード   
-2： FastQCでfastqファイルのリードのクオリティをチェック  
-3： fastpでトリミング  
-4： BWAでマッピングし、ソート  
-5： MarkDuplicatesで重複削除  
-6： BQSR（BaseRecalibrator、ApplyBQSR）  
-7： HaplotypeCaller  
-8： GenotypeGVCFs（変異）  
-9： SNP, INDELごとに、VariantFiltration  
-10： Filtered VCF（FILTER列PASS抽出）    
-
-<br>
-
-## 1：データ類のダウンロード
-
-### Sample NA18939  (Low coverage WGS)  
-
-```bash
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR768/SRR768162/SRR768162_1.fastq.gz
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR768/SRR768162/SRR768162_2.fastq.gz
-```
+ 
+1： FastQCでfastqファイルのリードのクオリティをチェック  
+2： fastpでトリミング  
+3： BWAでマッピングし、ソート  
+4： MarkDuplicatesで重複削除  
+5： BQSR（BaseRecalibrator、ApplyBQSR）  
+6： HaplotypeCaller  
+7： GenotypeGVCFs（変異）  
+8： SNP, INDELごとに、VariantFiltration  
+9： Filtered VCF（FILTER列PASS抽出）    
 
 <br>
-
-### GATK リファレンスデータ
-
-Broad Institute からダウンロード  
-
-https://console.cloud.google.com/storage/browser/gcp-public-data--broad-references
 
 ---
 
-- リファレンスゲノム ダウンロード  (hg38, BWA/samtools/GATK 用インデックス作成済み)  
-  - Homo_sapiens_assembly38.fasta
-  - Homo_sapiens_assembly38.fasta.fai
-  - Homo_sapiens_assembly38.dict
-  - Homo_sapiens_assembly38.fasta.amb
-  - Homo_sapiens_assembly38.fasta.ann
-  - Homo_sapiens_assembly38.fasta.bwt
-  - Homo_sapiens_assembly38.fasta.pac
-  - Homo_sapiens_assembly38.fasta.sa
-
-もしくは、BWA用にインデックスを作成する ( .fai/.dict/ .amb/.ann/.bwt/.pac/.sa ファイル作成 )  
-```bash
-bwa index Homo_sapiens_assembly38.fasta
-samtools faidx Homo_sapiens_assembly38.fasta
-gatk CreateSequenceDictionary -R Homo_sapiens_assembly38.fasta  
-```
-
 <br>
 
-- 既知のバリアントデータ ダウンロード  (BQSR用 known-sites として使用)   
-  - Homo_sapiens_assembly38.dbsnp138.vcf 
-  - Homo_sapiens_assembly38.dbsnp138.vcf.idx 
-  - Mills_and_1000G_gold_standard.indels.hg38.vcf.gz 
-  - Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi 
-
-<br>
-
-## 2：FastQC
+## 1：FastQC
 
 Babraham Institute FastQC  
 https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
@@ -87,7 +44,7 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2.fastq.gz
 
 <br>
 
-## 3：fastpでトリミング
+## 2：fastpでトリミング
 
 fastp  
 https://github.com/opengene/fastp  
@@ -132,7 +89,7 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2_trim.fastq.gz
 
 <br>
 
-## 4：BWAでマッピング
+## 3：BWAでマッピング
 
 BWAでFASTQファイルを参照ゲノム配列にマッピングし、samtoolsでソートする (sorted.bamが出力される)
 
@@ -176,7 +133,7 @@ samtools index SRR768162_sorted.bam
 
 <br>
 
-## 5：MarkDuplicatesで重複除去
+## 4：MarkDuplicatesで重複除去
 
 gatk MarkDuplicate  
 https://gatk.broadinstitute.org/hc/en-us/articles/5358880192027-MarkDuplicates-Picard  
@@ -228,7 +185,7 @@ plot-bamstats -p bamstats SRR768162_dedup_stats.txt
 
 <br>
 
-## 6：BQSR : BaseRecalibrator -> ApplyBQSR
+## 5：BQSR : BaseRecalibrator -> ApplyBQSR
 BQSR（Base Quality Score Recalibration）　既知変異データをもとに、シーケンサー由来の品質スコアの偏りを再計算し補正する。
 (recal.table, recal.bamが出力される)
 
@@ -255,7 +212,7 @@ gatk ApplyBQSR \
 
 <br>
 
-## 7：HaplotypeCaller バリアント検出
+## 6：HaplotypeCaller バリアント検出
 
 HaplotypeCallerは、リード配列をもとに参照ゲノムとの違いを解析し、SNPやINDELを検出するGATK標準の変異検出しVCF形式で出力する。
 (g.vcf.gzが出力される)
@@ -274,7 +231,7 @@ gatk HaplotypeCaller \
 
 <br>
 
-## 8：Genotyping
+## 7：Genotyping
 
 HaplotypeCallerで作成したGVCFファイルから変異候補を評価し、SNPやINDELの遺伝子型（Genotype）を確定して最終的なVCFファイルを作成する。
 (vcf.gzが出力される)
@@ -291,7 +248,7 @@ gatk --java-options "-Xmx4g" GenotypeGVCFs \
 
 <br>
 
-## 9：フィルタリング
+## 8：フィルタリング
 
 VariantFiltration の主要指標  
 これらの指標を用いて、低品質変異やalignment artifactを除外する。  
@@ -354,7 +311,7 @@ gatk MergeVcfs \
 
 <br>
 
-## 10：PASSのみ抽出
+## 9：PASSのみ抽出
 VariantFiltrationで付与されたFILTER情報を基に、PASS判定された高信頼度変異のみを抽出する。
 
 ```bash
