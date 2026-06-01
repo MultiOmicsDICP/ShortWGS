@@ -17,6 +17,16 @@ FASTQ から VCF 作成までの解析手順をまとめています。
 - [環境構築](docs/01_セットアップ.md)
 - [解析スクリプト](docs/02_WGS解析マニュアル.md)
 
+
+<br>
+
+## 練習用データ
+本マニュアルでは 1000 Genomes Project の公開データを練習用として使用しています。  
+Sample: NA18939  
+Low Coverage WGS  
+https://www.internationalgenome.org/data-portal/sample/NA18939  
+
+
 <br>
 
 ## Workflow
@@ -33,6 +43,12 @@ G --> H[GenotypeGVCFs]
 H --> I[VariantFiltration]
 I --> J[PASS VCF]
 ```
+
+
+
+## 注意事項
+
+実際の研究解析では、対象データや目的に応じてパラメータやフィルタリング条件の調整が必要です。
 
 
 
