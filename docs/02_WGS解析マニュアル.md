@@ -311,7 +311,7 @@ gatk MergeVcfs \
 
 <br>
 
-## 9：PASSのみ抽出
+## 9：抽出
 VariantFiltrationで付与されたFILTER情報を基に、PASS判定された高信頼度変異のみを抽出する。
 
 ```bash
