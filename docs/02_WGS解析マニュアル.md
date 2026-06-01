@@ -167,7 +167,9 @@ PU : flowcell/lane 識別子
 <br>
 
 
-#### マッピングしたソート済みbamファイルのインデックス作成 (すぐにMarkDuplicatesするならいらないかも)
+#### マッピングしたソート済みbamファイルのインデックス作成 
+(すぐにMarkDuplicatesするならいらないかも)
+
 ```bash
 samtools index SRR768162_sorted.bam
 ```
