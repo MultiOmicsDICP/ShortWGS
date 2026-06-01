@@ -9,7 +9,8 @@
 
 ShortWGS は、GATK Best Practices をベースにしたヒトゲノム（GRCh38/hg38）ショートリード Whole Genome Sequencing（WGS）解析マニュアルです。  
 Genome Analysis Toolkit（GATK）は、Broad Institute が開発しているゲノム解析ソフトウェアであり、NGSデータから SNP や INDEL などの遺伝子変異を高精度に検出するための標準的なツールとして広く利用されています。  
-本マニュアルでは、GATK Best Practices を参考に、FASTQ ファイルから VCF ファイルの作成までの解析手順を解説します。解析例として、1000 Genomes Project が公開しているヒトゲノム WGS データ（NA18939）を使用しています。  
+本マニュアルでは、GATK Best Practices を参考に、FASTQ ファイルから VCF ファイルの作成までの解析手順を解説します。  
+解析例として、1000 Genomes Project が公開しているヒトゲノム WGS データ（NA18939）を使用しています。  
 
 <br>
 
