@@ -28,10 +28,21 @@ Sample: NA18939
 Low Coverage WGS  
 https://www.internationalgenome.org/data-portal/sample/NA18939  
 
+<br>
+
+## 主な解析内容
+- FASTQ の品質評価（FastQC）
+- リードトリミング（fastp）
+- リファレンスゲノムへのマッピング（BWA-MEM）
+- BAM のソート・重複処理（SAMtools / Picard）
+- BQSR（Base Quality Score Recalibration）
+- 変異検出（GATK HaplotypeCaller）
+- SNP・INDEL のフィルタリング
+- QCレポート作成（samtools / GATK / bcftools / MultiQC）
 
 <br>
 
-## Workflow
+## 解析フロー
 
 ```mermaid
 graph TD
