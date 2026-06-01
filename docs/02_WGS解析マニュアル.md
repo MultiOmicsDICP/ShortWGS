@@ -258,7 +258,7 @@ gatk ApplyBQSR \
 HaplotypeCallerは、リード配列をもとに参照ゲノムとの違いを解析し、SNPやINDELを検出するGATK標準の変異検出しVCF形式で出力する。
 (g.vcf.gzが出力される)
 
-gatk HaplotypeCaller
+gatk HaplotypeCaller  
 https://gatk.broadinstitute.org/hc/en-us/articles/360042913231-HaplotypeCaller
 
 ```bash
