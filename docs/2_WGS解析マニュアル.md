@@ -347,7 +347,10 @@ Ts/Tv比、depth、変異分布などを可視化。
 
 ```bash
 # PDF出力
+
 # plot-vcfstats は pdflatex または tectonic が必要
+#apt-get update && apt-get install -y texlive-latex-extra
+
 plot-vcfstats -p vcfstats SRR768162_filtered_snps_indels_PASS_stats.txt
 ```
 
