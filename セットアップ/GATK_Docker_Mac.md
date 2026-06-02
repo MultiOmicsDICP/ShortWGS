@@ -1,4 +1,4 @@
-# Docker Colima を使用した環境設定
+# GATK Docker (Colima) を使用した環境設定
 
 <br>
 
