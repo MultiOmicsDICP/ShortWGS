@@ -100,6 +100,7 @@ FROM broadinstitute/gatk:latest
 RUN apt-get update && apt-get install -y \
     fastqc \
     fastp \
+    sra-toolkit \
     wget \
     bwa \
     samtools \
@@ -107,9 +108,12 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-matplotlib \
+    gnuplot \
+    texlive-latex-recommended \
+    texlive-fonts-recommended \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
+    
 # pipを使ってMultiQCをインストール
 RUN pip3 install multiqc
 
@@ -124,6 +128,13 @@ CMD ["/bin/bash"]
 2. Enter で保存。（File Name to Write: Dockerfile）
 3. Ctrl + X で終了
 
+
+もしファイルの書き換えなど行った場合で、データファイルがある場合は、データはビルドの時に無視するように指示する。  
+(ディレクトリにデータば無い場合はやる必要なし)
+```bash
+echo "*" > .dockerignore
+echo "!Dockerfile" >> .dockerignore
+```
 
 #### ビルドする（アップデート）
 ```bash
