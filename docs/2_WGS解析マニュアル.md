@@ -83,7 +83,7 @@ fastp \
 -p：paired-endのoverlap領域を利用してエラーを補正する機能。短いサイズのライブラリで有効  
 --trim_poly_g： polyG tail のトリミング
 
-### トリミング後、FastQCで再度チェック
+#### トリミング後、FastQCで再度チェック
 
 ```bash
 fastqc --nogroup -o ./reports_fastqc SRR768162_1_trim.fastq.gz
@@ -92,7 +92,7 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2_trim.fastq.gz
 
 <br>
 
-## 3：BWAでマッピング
+## 2：BWAでマッピング
 
 BWAでFASTQファイルを参照ゲノム配列にマッピングし、samtoolsでソートする (sorted.bamが出力される)
 
@@ -135,7 +135,7 @@ samtools index SRR768162.bam
 
 <br>
 
-## 4：MarkDuplicatesで重複除去
+## 3：MarkDuplicatesで重複除去
 
 gatk MarkDuplicate  
 https://gatk.broadinstitute.org/hc/en-us/articles/5358880192027-MarkDuplicates-Picard  
@@ -189,7 +189,7 @@ plot-bamstats -p bamstats SRR768162_markdup_sorted_stats.txt
 
 <br>
 
-## 5：BQSR : BaseRecalibrator -> ApplyBQSR
+## 4：BQSR : BaseRecalibrator -> ApplyBQSR
 BQSR（Base Quality Score Recalibration）　既知変異データをもとに、シーケンサー由来の品質スコアの偏りを再計算し補正する。
 (recal.table, recal.bamが出力される)
 
@@ -216,7 +216,7 @@ gatk ApplyBQSR \
 
 <br>
 
-## 6：HaplotypeCaller バリアント検出
+## 5：HaplotypeCaller バリアント検出
 
 HaplotypeCallerは、リード配列をもとに参照ゲノムとの違いを解析し、SNPやINDELを検出するGATK標準の変異検出しVCF形式で出力する。
 (g.vcf.gzが出力される)
@@ -235,7 +235,7 @@ gatk HaplotypeCaller \
 
 <br>
 
-## 7：Genotyping
+## 6：Genotyping
 
 HaplotypeCallerで作成したGVCFファイルから変異候補を評価し、SNPやINDELの遺伝子型（Genotype）を確定して最終的なVCFファイルを作成する。
 (vcf.gzが出力される)
@@ -252,7 +252,7 @@ gatk --java-options "-Xmx4g" GenotypeGVCFs \
 
 <br>
 
-## 8：フィルタリング
+## 7：フィルタリング
 
 VariantFiltration の主要指標  
 これらの指標を用いて、低品質変異やalignment artifactを除外する。  
@@ -315,7 +315,7 @@ gatk MergeVcfs \
 
 <br>
 
-## 9：抽出
+## 8：抽出
 VariantFiltrationで付与されたFILTER情報を基に、PASS判定された高信頼度変異のみを抽出する。
 
 ```bash
