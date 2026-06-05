@@ -144,8 +144,7 @@ gatk MarkDuplicates \
     -I SRR768162_sorted.bam \
     -O SRR768162_dedup.bam \
     -M SRR768162_dedup_metrics.txt \
-    --VALIDATION_STRINGENCY LENIENT \
-    --REMOVE_DUPLICATES true
+    --VALIDATION_STRINGENCY LENIENT
 ```
 
 <br>
