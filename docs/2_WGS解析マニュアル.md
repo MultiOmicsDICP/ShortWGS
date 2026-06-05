@@ -8,7 +8,7 @@
 ## Overview
  
 1： FastQCでfastqファイルのリードのクオリティをチェック  
-（＊ FastQCの結果を確認し,オプションでfastpでトリミング ）
+（＊ FastQCの結果を確認し,オプションでfastpでトリミング ）  
 2： BWAでマッピングし、ソート  
 3： MarkDuplicatesで重複削除  
 4： BQSR（BaseRecalibrator、ApplyBQSR）  
@@ -43,8 +43,8 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2.fastq.gz
 
 <br>
 
-### オプション
-### fastpでトリミング
+#### オプション
+#### fastpでトリミング
 
 FastQCの結果を確認し、今回のデータはリード末端のクオリティが低いのでトリミングを行ったが、必須ではない。
 （むしろ最近では行わない方が多い。）
