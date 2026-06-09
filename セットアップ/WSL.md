@@ -2,7 +2,7 @@
 &nbsp;
 
 ## 解析環境
-- Windows11にWSL2(サブシステム2.6.3) インストール
+- Windows11 Pro Core i5-13500T メモリ16.0GBにWSL2(サブシステム2.6.3) インストール
 - Ubuntu 24.04.4 LTS インストール
 - Python 3.12.3
 - Python仮想環境　Miniforge3-24.9.0-0-Linux-x86_64.sh インストール  
@@ -118,7 +118,7 @@ GATK-4.6.2.0
 ```  
 &nbsp; 
 
-multiQC　  v 1.34  
+multiQC　  v 1.35  
 
 ```bash  
     #Python仮想環境下へインストールする  　　
