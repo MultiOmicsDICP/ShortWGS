@@ -43,7 +43,7 @@ fastqc --nogroup -o ./reports_fastqc SRR768162_2.fastq.gz
 
 <br>
 
-#### オプション
+#### 【オプション】
 #### fastpでトリミング
 
 FastQCの結果を確認し、今回のデータはリード末端のクオリティが低いのでトリミングを行ったが、必須ではない。
@@ -108,9 +108,9 @@ https://www.htslib.org/
 bwa mem -t 4 \
     -R "@RG\tID:SRR768162\tSM:NA18939\tPL:ILLUMINA\tLB:lib1" \
     Homo_sapiens_assembly38.fasta \
-    SRR768162_1_trim.fastq.gz \
-    SRR768162_2_trim.fastq.gz | \
-    samtools view -@4 -bS -o SRR768162.bam
+    SRR768162_1.fastq.gz \
+    SRR768162_2.fastq.gz | \
+    samtools view -@ 4 -b -o SRR768162.bam
 ```
 
 bwa mem の -R は Read Group 情報を付与するオプション。  
