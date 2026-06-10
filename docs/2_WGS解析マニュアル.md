@@ -166,7 +166,7 @@ samtools index SRR768162_markdup_sorted.bam
 
 BAMファイルのmapping率、properly paired率、duplicate率などを出力し確認。
 ```bash
-samtools flagstat SRR768162_markdup_sorted.bam > SSRR768162_markdup_sorted_flagstat.txt
+samtools flagstat SRR768162_markdup_sorted.bam > SRR768162_markdup_sorted_flagstat.txt
 ```
 
 duplicate read除去後のlibrary insert size 分布を評価する。
