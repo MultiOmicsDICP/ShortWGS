@@ -2,10 +2,14 @@
 &nbsp;
 
 ## 解析環境
-- Windows11 Pro Core i5-13500T メモリ16.0GBにWSL2(サブシステム2.6.3) インストール
+- Windows11 Pro Core i5-13500T メモリ16.0GBにWSL2(サブシステム2.6.3) イン
 - Ubuntu 24.04.4 LTS インストール
-- Python 3.12.3
+- Python 3.12.3  
+  
+     [WSL を使用して Windows に Linux をインストールする方法](https://learn.microsoft.com/ja-jp/windows/wsl/install)  
+
 - Python仮想環境　Miniforge3-24.9.0-0-Linux-x86_64.sh インストール  
+    [Miniforge](https://github.com/conda-forge/miniforge)    
 &nbsp;
 
 ## ツールのインストール   
